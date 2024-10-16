@@ -1,5 +1,6 @@
-const mongodb = require("mongodb");
-const host = "localhost";
+const mongodb = require('mongodb');
+
+const host = 'localhost';
 const port = 27017;
 
 class DBClient {
@@ -9,7 +10,7 @@ class DBClient {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    this.databaseName = "files_manager";
+    this.databaseName = 'files_manager';
   }
 
   async connect() {
@@ -31,11 +32,11 @@ class DBClient {
   async nbUsers() {
     try {
       const db = await this.connect(); // Reuse connection
-      const collection = db.collection("users");
-      const number_of_users = await collection.countDocuments(); // Get count directly
-      return number_of_users;
+      const collection = db.collection('users');
+      const numberOfUsers = await collection.countDocuments(); // Get count directly
+      return numberOfUsers;
     } catch (err) {
-      console.error("Error counting users:", err);
+      console.error('Error counting users:', err);
       return 0;
     }
   }
@@ -43,15 +44,15 @@ class DBClient {
   async nbFiles() {
     try {
       const db = await this.connect(); // Reuse connection
-      const collection = db.collection("files");
-      const number_of_docs = await collection.countDocuments(); // Get count directly
-      return number_of_docs;
+      const collection = db.collection('files');
+      const numberOfDocs = await collection.countDocuments(); // Get count directly
+      return numberOfDocs;
     } catch (err) {
-      console.error("Error counting files:", err);
+      console.error('Error counting files:', err);
       return 0;
     }
   }
 }
 
- const dbClient = new DBClient;
- module.exports = dbClient;
+const dbClient = new DBClient();
+module.exports = dbClient;
